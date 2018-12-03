@@ -12,31 +12,7 @@ typedef struct testcase_t {
 
 testcase_t g_testcases[] =
 {
-	{"ping", NULL, test_ping},
-	{ "version", NULL, test_version },
-	{ "hardware_test", NULL, test_hardware_test },	
-	{ "get_frame", "get_frame", test_get_frame },
-#ifdef SUPPORT_OPENCV
-	{ "start_video", "start_video", test_start_video },
-#endif
-	{ "start_camera", "start_camera", test_start_camera },
-#ifdef SUPPORT_OPENCV
-	{ "get_frame", "get_frame", test_get_frame },
-#endif
-	{"stop_camera", "stop_camera", test_stop_camera },
-        {"test_SqueezeNet","test_SqueezeNet",test_SqueezeNet},
-        {"test_SSD_MobileNet","test_SSD_MobileNet",test_SSD_MobileNet},
-        {"test_Resnet_18","test_Resnet_18",test_Resnet_18},
-        {"test_gendernet","test_gendernet",test_gendernet},
-        {"test_AgeNet","test_AgeNet",test_AgeNet},
-        {"test_TinyYoloNet","test_TinyYoloNet",test_TinyYoloNet},
-        {"test_googleNet","test_googleNet",test_googleNet},
-        {"test_mnist","test_mnist",test_mnist},
-        {"test_inception","test_inception",test_inception},
-        {"test_mobilenets","test_mobilenets",test_mobilenets},
-        {"test_ssd_googlenet_model","test_ssd_googlenet_model",test_ssd_googlenet_model},
-        {"test_tiny_yolo_v2","test_tiny_yolo_v2",test_tiny_yolo_v2},
-        {"test_ssd_resnet_model","test_ssd_resnet_model",test_ssd_resnet_model}
+	{"test_hongxing_facenet","test_hongxing_facenet",test_hongxing_facenet}
 };
 int g_case_count = sizeof(g_testcases) / sizeof(testcase_t);
 

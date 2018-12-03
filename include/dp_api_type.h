@@ -32,6 +32,7 @@ typedef enum {
 	DP_CMD_STOP_PARSE_MODEL=67,
 	DP_CMD_IMAGE_BLOB_SIZE=68,
 	DP_CMD_SECOND_IMG_BUFFER=70,
+	DP_CMD_SECOND_IMG_BUFFER_NUM=71,
 }dp_command_t;
 
 typedef enum {
