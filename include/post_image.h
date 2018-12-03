@@ -18,9 +18,11 @@ public:
     void print_tiny_yolov1_net_result(void *fathomOutput,Box *box_demo,int *num_box_demo);
     void print_inception_result(void *fathomOutput);
     void print_tiny_yolov2_result(void *fathomOutput,Box *box_demo,int *num_box_demo);
+	void print_tiny_yolov2_face_result(void *fathomOutput,std::vector<float>& probs, std::vector<cv::Rect>& boxes);
     void print_mnist_net_result(void* fathomOutput);
     void print_mobilinet_net_result(void *fathomOutput);
     void print_alexnet_result(void *fathomOutput);
+	void print_facenet_result(void *fathomOutput,char *peo_name);
 private:
 
 };

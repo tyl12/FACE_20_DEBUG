@@ -48,6 +48,17 @@ typedef void(*dp_second_blob_outresult_back_cb_t)(void * result,void *param);
 
 typedef void(*dp_parse_blob_stage_time_cb_t)(double * result,void *param);
 
+/** \ingroup dp_first_blob_out_back_cb_t
+* host parseing box image to device func callack type.
+*Invoke this callback when receving a first_result and give the boxes
+*you pass a pointer to a callback function of this type.
+*param[in] a pointer to the image box.
+*param[in] param user's param.
+* \returns void
+*/
+typedef void(*dp_send_to_device_box_cb_t)(dp_image_box_t *box,void *param);
+
+
 /********************************************
 general purpose functions
 *******************************************/
@@ -187,7 +198,7 @@ EXTERN DLL int dp_send_first_box_image(int box_num,dp_image_box_t *box);
 * 
 * \returns 0 if sucess, <0 if error occured.
 */
-
+EXTERN DLL int dp_send_second_image_num(int box_num);
 EXTERN DLL int dp_send_second_image(unsigned short* imagebuffer,int buffersize,int box_num);
 
 EXTERN DLL int dp_send_stop_cmd();

@@ -7,7 +7,8 @@ SRC_INCLUDE     := -I ../include \
                    -I  /usr/local/include \
                    -I /usr/local/include/libusb-1.0
 SRC_DIR         := ../src
-LIB_DIR         := ../so
+LIB_DIR         := ../so 
+#RAWDATAOBJECTFILES :=VALID_PEOPLE.o
 OBJS            := ${SRC_DIR}/Common.o \
                    ${SRC_DIR}/fp16.o \
                    ${SRC_DIR}/share_utils.o\
@@ -17,20 +18,24 @@ OBJS            := ${SRC_DIR}/Common.o \
                    ${SRC_DIR}/Region.o \
                    ${SRC_DIR}/interpret_output.o  \
                    ${SRC_DIR}/model_sample.o  \
-                   ${SRC_DIR}/test.o
+		   ${SRC_DIR}/detection_layer.o  \
+                   ${SRC_DIR}/test.o	
 TARGET          := ../Deepano_cdk_TEST
 SRC_DIR         :=${SRC_DIR}/Common.cpp ${SRC_DIR}/fp16.c ${SRC_DIR}/share_utils.c ${SRC_DIR}/post_image.cpp ${SRC_DIR}/video_result_callback.c ${SRC_DIR}/Fp16Convert.c ${SRC_DIR}/interpret_output.cpp ${SRC_DIR}/model_sample.c ${SRC_DIR}/test.cpp
 DEPS := ${SRC_DIR:.c=.d}
 DEPS += ${SRC_DIR:.cpp=.d}
 
-CFLAGS = -g -Wall -std=c++11 
-LFLAGS = -L ${LIB_DIR} `pkg-config opencv --libs` -lpthread -lusb-1.0 -ldp_api
+#CFLAGS = -g -Wall -std=c++11 -fPIC
+#LFLAGS = -L ${LIB_DIR} -L /usr/local/lib/ `pkg-config opencv --libs` -lpthread -lusb-1.0 -ldp_api
+
+CFLAGS = -g -Wall -std=c++11 `pkg-config --cflags opencv`
+LFLAGS = -L ${LIB_DIR} `pkg-config opencv --libs`  -lpthread -lusb-1.0 -ldp_api
 
 .PHONY:all clean
 all: ${TARGET}
 
 ${TARGET}:${OBJS}
-	        ${CC} ${CFLAGS} ${SRC_INCLUDE} -o ${TARGET} ${OBJS} ${LFLAGS}
+	        ${CC} ${CFLAGS} ${SRC_INCLUDE} -o ${TARGET} ${OBJS} ${LFLAGS} 
 
 %.d: %.c
 	@set -e; rm -f $@; \
@@ -49,6 +54,11 @@ ${TARGET}:${OBJS}
 
 %.o:%.cpp
 	${CC} ${CFLAGS} ${SRC_INCLUDE} -c $< -o $@
+#VALID_PEOPLE.o: ../yuqj
+#	@mkdir -p $(dir $@)
+#	$(OBJS) -I binary --rename-section .data=.ddr.data \
+#		--redefine-sym  _binary_$(subst /,_,$(subst .,_,$<))_start=VALID_PEOPLE \
+#		-O elf32-sparc -B sparc $< $@
 
 clean:
 	rm -rf *.o *.d ${TARGET} *~ ../src/*.o  
